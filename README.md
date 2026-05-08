@@ -17,7 +17,7 @@ Il progetto si basa su 4 skill specializzate, indipendenti e portatili:
 - **Conoscenza**: Dosi precise (10g Olio, 120g Yogurt, 150g Frutta) e bilanciamento dei macro-nutrienti.
 - **Esempio d'uso**: *"Analizza la mia nuova dieta PDF e crea il piano settimanale escludendo il merluzzo."*
 
-### 2. `canteen-matcher` (The Canteen Assistant)
+### 2. `menu-matcher` (The Canteen Assistant)
 Risolve il problema dei pasti fuori casa usando intelligenza gastronomica.
 - **Processo**: Analizza menu da foto/screenshot/testo. Flagga i pasti come "consumati" in locale.
 - **Logica**: Se il menu non offre il piatto previsto, propone uno **"Smart Swap"** con qualsiasi altro giorno della settimana. Conosce gli ingredienti "nascosti" nei piatti della tradizione.

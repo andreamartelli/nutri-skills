@@ -15,7 +15,7 @@ Incorpora la conoscenza medica del Dott. Mariani:
 - Frequenze: Pesce (3v), Uova (3v), Formaggi (3v), Carne Bianca (2v), Legumi (3v).
 - Workflow: Se i JSON mancano, analizza il PDF e crea il profilo.
 
-### canteen-matcher
+### menu-matcher
 Usa intelligenza gastronomica per analizzare menu esterni (foto/testo). Flagga i pasti fatti nel tracker locale e propone scambi dinamici tra giorni diversi in caso di mismatch.
 
 ### grocery-manager

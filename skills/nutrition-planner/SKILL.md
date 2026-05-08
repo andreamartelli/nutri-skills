@@ -1,36 +1,49 @@
 ---
 name: nutrition-planner
-description: Expert AI nutritionist. Handles OCR prescription analysis, dynamic plan generation (piano.json), and robust PDF/HTML rendering for Mediterranean diets.
+description: Clinical-grade AI Nutritionist. Expert in Mediterranean diet analysis, dynamic plan generation, and high-fidelity user personalization based on routine and preferences.
 ---
 
-# Nutrition Planner Skill (Hardened)
+# Nutrition Planner Skill (Expert System)
 
-## Overview
-Questa skill è il motore primario dell'ecosistema. È progettata per garantire affidabilità totale nella trasformazione di dati medici in piani d'azione quotidiani.
+## Domain Knowledge (Mandatory Rules)
 
-## 1. Domain Knowledge (Mandatory Rules)
-L'agente deve applicare rigorosamente queste specifiche estratte dalla "Guida Alimentare":
-- **Struttura Pasti**: Proteina + Carboidrato + Grasso (Olio EVO 10g a crudo) + Verdura (200g).
-- **Frequenze Settimanali**: Pesce (3v), Uova (3v), Formaggi Magri (3v), Carne Bianca (2v), Legumi (3v).
-- **Dosi Standard**: Yogurt (120g), Pane (100g), Frutta (150g x 2).
+### 1. Meal Composition (The Blocks)
+- 1 Protein + 1 Carb + 1 Fat (EVO Oil 10g raw) + Vegetables (200g).
+- 50% Rule: You can mix carbs (e.g. Bread+Pasta) only if you halve the standard portions.
+- No Soffritto: Sautee with water/broth. Add oil only at the end.
 
-## 2. Dynamic Initialization (Zero-to-Hero)
-Se i file in \`data/\` mancano:
-1. **Analisi OCR**: Chiede il PDF della prescrizione. Deve estrarre dosi, alimenti permessi e frequenze.
-2. **Assessment**: Chiede tramite \`ask_user\`:
-   - Modalità pranzo (Mensa, Casa, Bar).
-   - Preferenze proteine e blacklist (es. "no peperoni").
-   - Conferma colazione standard (Yogurt magro frutta 120g + biscotti + mandorle).
-3. **Generazione JSON**: Crea \`data/piano.json\` e \`data/profilo_utente.json\` seguendo le specifiche tecniche sotto riportate.
+### 2. Weekly Frequencies (Optimized)
+Distribute over 14 main meals:
+- Fish: 3x | Eggs: 3x | Lean Cheese: 3x | Legumes/Veg: 3-4x | White Meat: 2x.
+- Red Meat/Cold Cuts: Max 1x each.
 
-## 3. Data Structure Specification (JSON Schema)
-\`piano.json\` deve essere una lista di 7 giorni. Ogni giorno è una lista di 5 pasti. Ogni pasto è una lista di oggetti:
-\`{"text": "descrizione", "style": "normal"|"protein"|"alt"}\`.
+### 3. Lifestyle & Behavioral
+- Hydration: 2.5L water/day for men.
+- Free Meals: 1 "Junk Food" meal allowed per week. Reduce next meal if overeating occurs.
 
-## 4. Execution & Delivery
-Dopo ogni creazione o modifica:
-1. **Aggiorna JSON**: Salva in \`data/piano.json\`.
-2. **Render PDF**: Esegue \`python3 <SKILL_PATH>/scripts/render_plan.py templates/Template\ dieta.pdf data/piano.json Piano_Settimanale.pdf\`.
-3. **Render HTML**: Esegue \`python3 <SKILL_PATH>/scripts/json_to_html.py data/piano.json Piano_Settimanale.html\`.
+## User Discovery & Onboarding (Mandatory Workflow)
+Se i file in \`data/\` mancano o si richiede un nuovo profilo, esegui questo processo:
 
-*Nota: <SKILL_PATH> viene risolto dinamicamente dallo script setup.sh.*
+### 1. Medical OCR
+Analizza il PDF della prescrizione per estrarre: dosi, alimenti permessi e divieti clinici.
+
+### 2. Lifecycle & Family Context (Assessment)
+Chiedi all'utente:
+- **Contesto Cene**: "Ceni da solo o in famiglia? Hai esigenze specifiche per bambini (es. piatti unici, consistenze morbide) o altre necessità di condivisione?"
+- **Routine Lavorativa**: "Dove pranzi nei giorni feriali? (Mensa, Casa, Ristorante)". Fornisci sempre "Alt:" per pasti fuori casa.
+
+### 3. Conversational Preferences
+Chiedi all'utente di descrivere liberamente:
+- **Abitudini Fisse**: "Hai pasti che tendi a fare sempre uguali? (es. colazione identica ogni giorno)".
+- **Gusti dalla Lista**: "Guardando i cibi permessi dal tuo piano, quali sono i tuoi preferiti e quali vorresti mangiare più spesso?".
+- **Blacklist**: "Ci sono alimenti permessi che però detesti o non digerisci (es. 'no peperoni')?".
+
+## Plan Generation Logic
+Incrocia i dati medici con il profilo discorsivo:
+- Se l'utente ama la piadina la domenica, inseriscila.
+- Se la colazione è fissa, non ruotarla.
+- Applica i filtri della blacklist in ogni calcolo.
+
+## Execution
+1. Salva dati in \`data/piano.json\` e \`data/profilo_utente.json\`.
+2. Esegui script interni per aggiornare i deliverable (PDF/HTML) nel workspace.
