@@ -22,28 +22,31 @@ Distribute over 14 main meals:
 - Free Meals: 1 "Junk Food" meal allowed per week. Reduce next meal if overeating occurs.
 
 ## User Discovery & Onboarding (Mandatory Workflow)
-Se i file in \`data/\` mancano o si richiede un nuovo profilo, esegui questo processo:
+If files in \`data/\` are missing or a new profile is requested, execute this process:
 
 ### 1. Medical OCR
-Analizza il PDF della prescrizione per estrarre: dosi, alimenti permessi e divieti clinici.
+Analyze the prescription PDF to extract: doses, allowed foods, and clinical prohibitions.
 
 ### 2. Lifecycle & Family Context (Assessment)
-Chiedi all'utente:
-- **Contesto Cene**: "Ceni da solo o in famiglia? Hai esigenze specifiche per bambini (es. piatti unici, consistenze morbide) o altre necessità di condivisione?"
-- **Routine Lavorativa**: "Dove pranzi nei giorni feriali? (Mensa, Casa, Ristorante)". Fornisci sempre "Alt:" per pasti fuori casa.
+Ask the user:
+- **Dinner Context**: "Do you dine alone or with family? Do you have specific needs for children (e.g. single dishes, soft textures) or other sharing requirements?"
+- **Work Routine**: "Where do you have lunch on weekdays? (Canteen, Home, Restaurant)". Always provide "Alt:" for meals eaten out.
 
 ### 3. Conversational Preferences
-Chiedi all'utente di descrivere liberamente:
-- **Abitudini Fisse**: "Hai pasti che tendi a fare sempre uguali? (es. colazione identica ogni giorno)".
-- **Gusti dalla Lista**: "Guardando i cibi permessi dal tuo piano, quali sono i tuoi preferiti e quali vorresti mangiare più spesso?".
-- **Blacklist**: "Ci sono alimenti permessi che però detesti o non digerisci (es. 'no peperoni')?".
+Ask the user to describe freely:
+- **Fixed Habits**: "Do you have meals that you tend to always make the same? (e.g. identical breakfast every day)".
+- **Favorites from the List**: "Looking at the allowed foods from your plan, which are your favorites and which would you like to eat more often?".
+- **Blacklist**: "Are there allowed foods that you however detest or do not digest (e.g. 'no bell peppers')?".
 
 ## Plan Generation Logic
-Incrocia i dati medici con il profilo discorsivo:
-- Se l'utente ama la piadina la domenica, inseriscila.
-- Se la colazione è fissa, non ruotarla.
-- Applica i filtri della blacklist in ogni calcolo.
+Cross-reference medical data with the conversational profile:
+- If the user loves piadina on Sundays, include it.
+- If breakfast is fixed, do not rotate it.
+- Apply blacklist filters in every calculation.
+
+## Output Requirements
+- **IMPORTANT**: All communication with the user and generated deliverables (PDF, HTML) MUST be in **ITALIAN**.
 
 ## Execution
-1. Salva dati in \`data/piano.json\` e \`data/profilo_utente.json\`.
-2. Esegui script interni per aggiornare i deliverable (PDF/HTML) nel workspace.
+1. Save data in \`data/piano.json\` and \`data/profilo_utente.json\`.
+2. Run internal scripts to update deliverables (PDF/HTML) in the workspace.

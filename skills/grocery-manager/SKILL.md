@@ -5,26 +5,25 @@ description: Intelligent grocery list generator. Aggregates weekly plan requirem
 
 # Grocery Manager Skill (Efficient Shopper)
 
-## Overview
-Questa skill trasforma il piano alimentare in un piano d'azione logistico. Ottimizza la spesa per evitare sprechi e dimenticanze.
-
 ## Logic & Aggregation
-1. **Filtro Pasti**: Chiede quali pasti verranno fatti fuori casa (es. "Pranzi Lun-Ven in mensa") e li esclude dai calcoli.
-2. **Aggregazione Dosi**: Somma le grammature del piano.
-   - Yogurt: 7 giorni x 120g = 1 confezione da 1kg.
-   - Pollo: 2 pasti x 200g = 400g di petto di pollo.
-   - Mandorle: 7 giorni x 15pz = circa 200g.
-3. **Pantry Logic**: Se l'utente specifica di avere già degli ingredienti (es. "Olio e riso ci sono"), la skill li marca come già presenti.
+1. **Meal Filter**: Conduct a Q&A to identify which meals will be eaten out (e.g. "Mon-Fri lunch at corporate canteen") and exclude them from shopping calculations.
+2. **Dose Aggregation**: Programmatically sum the grammage from the weekly plan to provide commercial quantities.
+   - Example: 7 days x 120g Yogurt = Suggest 1 tub of 1kg.
+   - Example: 2 meals x 200g Chicken = 400g pack.
+3. **Pantry Logic**: If the user identifies existing stock (e.g. "Oil and rice are already in the pantry"), mark them as "present" and exclude from the list.
 
 ## Grocery List Structure
-Genera una lista ordinata per reparti standard (per minimizzare i tempi in negozio):
-- **Ortofrutta**: Verdure e frutta di stagione (basate sul piano).
-- **Banco Frigo**: Yogurt, formaggi magri, uova.
-- **Macelleria/Pescheria**: Carne e pesce freschi.
-- **Dispensa**: Pasta, riso, cracker, gallette, olio.
+Generates a structured list sorted by standard supermarket departments to optimize the route:
+- **Produce**: Seasonal vegetables and fruits required by the plan.
+- **Dairy/Fridge**: Yogurt, lean cheeses, eggs.
+- **Butcher/Fishmonger**: Fresh meat and fish portions.
+- **Pantry**: Pasta, rice, crackers, rice cakes, EVO oil.
+
+## Output Requirements
+- **IMPORTANT**: All communication with the user and the generated shopping list MUST be in **ITALIAN**.
 
 ## Workflow
-1. Leggi data/piano.json.
-2. Q&A veloce su pasti fuori casa e scorte esistenti.
-3. Generazione lista testuale nel workspace.
-4. Suggerimento scadenze (es. "Compra il pesce fresco il giorno in cui lo cucini").
+1. **Input**: Read \`data/piano.json\`.
+2. **Q&A**: Conduct quick inquiry on meals eaten out and existing pantry levels.
+3. **Generation**: Produce the final textual shopping list in the workspace.
+4. **Logistics**: Suggest expiration/freshness alerts (e.g. "Purchase fresh fish on Friday for Saturday's meal").
