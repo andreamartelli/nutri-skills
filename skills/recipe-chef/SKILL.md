@@ -1,20 +1,26 @@
-# Recipe Chef Skill (Mediterranean Expert)
+---
+name: recipe-chef
+description: Personal Mediterranean chef. Translates the theoretical diet plan and grocery haul into real, actionable recipes. Checks inventory and suggests Italian-style healthy meals.
+---
+
+# Recipe Chef Skill (Actionable Meals)
 
 ## Overview
-Trasforma il piano nutrizionale in ricette reali, sane e gustose.
+Questa skill chiude il cerchio trasformando "Ceci" e "Olio" in un piatto da ristorante mediterraneo. Agisce basandosi sulla disponibilità reale di ingredienti.
 
-## Culinary Bias & Rules
-- **Tradizione**: Focus su Cucina Italiana e Mediterranea.
-- **Famiglia**: Ricette fattibili in <30 min e gradite a un bambino di 2.5 anni.
-- **Tecnica**: Niente soffritti. Usa cotture al vapore, cartoccio, o stufate con brodo/acqua. Olio aggiunto solo a crudo alla fine.
-- **Creatività**: Può spaziare in altre cucine (es: Poke, Stir-fry) se il menu prevede riso o cereali, purché semplici.
+## Recipe Logic & Style
+- **Bias Mediterraneo**: Propone ricette sane, semplici e gustose della tradizione italiana.
+- **Tecnica "No-Soffritto"**: Istruisce su cotture alternative (es. stufare cipolle con acqua prima di aggiungere legumi) per rispettare la dieta senza perdere sapore.
+- **Inventory Check**: Se l'utente fornisce una foto dello scontrino o conferma la spesa, la skill sa esattamente cosa c'è in dispensa. Se manca un ingrediente (es. rosmarino), propone una variante (es. timo o salvia).
 
-## Inventory Check
-1. Ricevi input (Foto scontrino o conferma lista spesa).
-2. Confronta con \`data/piano.json\`.
-3. Se manca un ingrediente chiave per stasera (es: mancano le lenticchie), segnalalo subito e proponi un'alternativa con quello che c'è in frigo.
+## Recipe Structure
+Per ogni pasto proposto, specifica:
+1. **Dosi Precise**: Prelevate dal piano (es. "80g Pasta").
+2. **Procedimento**: Semplice e veloce (<30 min).
+3. **Consiglio Chef**: Un trucco per migliorare il sapore senza aggiungere grassi (es. "Aggiungi pepe nero per esaltare il sapore delle lenticchie").
 
 ## Workflow
-1. Analizza "Cosa c'è in frigo" (da input o assunzione lista spesa).
-2. Propone la ricetta per il prossimo pasto.
-3. Spiega i passi in modo colloquiale ma preciso (dosi grammate).
+1. Analizza input (foto scontrino, carrello online, o assume lista spesa fatta).
+2. Leggi data/piano.json per conoscere il pasto imminente.
+3. Propone la ricetta completa.
+4. Segnala mancanze: "Attenzione, per stasera mancano le zucchine, vuoi sostituirle con gli spinaci che hai comprato?".

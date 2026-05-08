@@ -1,23 +1,33 @@
-# Canteen Matcher Skill (Expert)
+---
+name: canteen-matcher
+description: Professional assistant for eating out. Analyzes external menus (text/images) using culinary intelligence to find matches with the user's diet plan. Handles "Smart Swaps" and tracks meal consumption.
+---
+
+# Canteen Matcher Skill (Expert Assistant)
 
 ## Overview
-Analizzatore di menu esterni con intelligenza gastronomica. Gestisce l'incertezza dei pasti fuori casa.
+Questa skill risolve il problema dei pasti "fuori controllo" (mensa, ristorante). Agisce incrociando il menu del giorno con il Master Plan e lo stato attuale della settimana.
 
-## Culinary Domain Intelligence
-Non limitarti alla lettura del testo. Se il menu cita:
-- *"Carbonara"*: Identifica Uova + Guanciale (Grasso animale). Segnala come sgarro se non previsto.
-- *"Pesce al forno"*: Assumi condimento con olio. Riduci l'olio nel resto del menu.
-- *"Risotto"*: Identifica carboidrato complesso + burro.
-Preferisci sempre insalate composte o proteine semplici (ai ferri/vapore).
+## Culinary Intelligence
+Non limitarti a cercare le parole. Usa la conoscenza del dominio culinario italiano per analizzare i piatti proposti:
+- **Ingredienti Nascosti**: Se il menu dice "Pollo alla Cacciatora", sai che contiene olio/grassi e verdure (pomodoro, olive).
+- **Bilanciamento Grassi**: Se un secondo è già condito (es. "Arrosto"), istruisci l'utente a non aggiungere l'olio previsto nel piano sull'insalata.
+- **Sostituzioni**: Se il menu offre "Pasta al Pesto", identifica i grassi (pinoli, olio) e suggerisci di ridurre la quota grassi del resto del vassoio.
 
-## Smart Swap Logic
-Se il pasto previsto per OGGI non è disponibile:
-1. Analizza \`data/piano.json\` e cerca un match in *qualunque* altro giorno della settimana non ancora consumato.
-2. Proponi lo scambio: *"Oggi mangiamo il pesce del venerdì, e venerdì faremo le uova di oggi"*.
-3. Aggiorna \`data/state_settimanale.json\` per tenere traccia dello spostamento.
+## Smart Swap & Persistence
+Se il menu esterno non offre nulla di compatibile con il pranzo previsto per OGGI:
+1. **Analisi Cross-Day**: Cerca un match in qualsiasi altro giorno della settimana (es. scambia il pesce del venerdì con le uova di oggi).
+2. **Consulenza**: Spiega all'utente il perché dello scambio: "Oggi in mensa c'è un ottimo branzino, lo prendiamo al posto delle uova e spostiamo le uova a venerdì".
+3. **Aggiornamento Stato**: Salva la modifica in data/state_settimanale.json. Flagga il pasto come "consumato".
+
+## Input Types
+Supporta:
+- **Testo**: Copia-incolla da intranet.
+- **Immagini**: Foto di menu cartacei o screenshot.
+- **PDF**: Listini prezzi o menu settimanali scaricati.
 
 ## Workflow
-1. Ricevi input (Foto/Testo/PDF).
-2. Leggi Master Plan e Tracker (\`state_settimanale.json\`).
-3. Filtra piatti tramite Blacklist (\`profilo_utente.json\`).
-4. Genera 2-3 opzioni di vassoio ottimali.
+1. Leggi data/piano.json e data/state_settimanale.json.
+2. Analizza il menu fornito.
+3. Proponi 2-3 opzioni di "Vassoio Ideale".
+4. Evidenzia criticità (es. "Attenzione: questo piatto è fritto").

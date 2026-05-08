@@ -1,16 +1,25 @@
-# Istruzioni Smart Workspace - Nutrizione
+# nutri-skills: Smart Workspace Instructions
 
-Questo workspace è configurato per gestire il tuo ecosistema nutrizionale AI. L'agente utilizzerà le skill globali `nutrition-planner`, `canteen-matcher`, `grocery-manager` e `recipe-chef`.
+Questo workspace è il centro di comando del tuo ecosistema nutrizionale. Utilizza le skill globali attivandole con i comandi descritti nel README.
 
-## Gestione Dati e Output
-- **Dati Persistenti**: Tutti i database vivono in `./data/` (JSON).
-- **Output Generati**: Tutti i file visivi (PDF, HTML, PNG) vengono generati nella radice di questo workspace per facilità di accesso.
-- **Template**: `./templates/Template dieta.pdf`.
+## Data & Persistence
+- **data/piano.json**: Il database settimanale.
+- **data/profilo_utente.json**: Allergie, intolleranze e blacklist.
+- **data/state_settimanale.json**: Tracker dei pasti consumati e degli swap.
 
-## Regole di Inizializzazione
-Se i file in `./data/` sono assenti, la skill `nutrition-planner` deve avviare il setup iniziale del profilo e del piano.
+## Skill Integration Details
 
-## Comandi Rapidi
-- **"Aggiorna la dieta"**: Innesca il workflow di pianificazione e rigenera i file locali.
-- **"Cosa mangio in mensa?"**: Analizza menu esterni e aggiorna lo stato locale.
-- **"Genera lista spesa"**: Produce la lista basandosi sul piano e sullo stato attuale.
+### nutrition-planner
+Incorpora la conoscenza medica del Dott. Mariani:
+- Dosi: 10g Olio, 120g Yogurt, 150g Frutta, ecc.
+- Frequenze: Pesce (3v), Uova (3v), Formaggi (3v), Carne Bianca (2v), Legumi (3v).
+- Workflow: Se i JSON mancano, analizza il PDF e crea il profilo.
+
+### canteen-matcher
+Usa intelligenza gastronomica per analizzare menu esterni (foto/testo). Flagga i pasti fatti nel tracker locale e propone scambi dinamici tra giorni diversi in caso di mismatch.
+
+### grocery-manager
+Genera liste spesa aggregate per reparto, chiedendo prima all'utente quanti pasti farà effettivamente a casa.
+
+### recipe-chef
+Propone ricette reali, bias mediterraneo, tecnica no-soffritto. Verifica la presenza degli ingredienti tramite scontrini o liste della spesa.

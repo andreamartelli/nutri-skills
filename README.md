@@ -1,66 +1,53 @@
 # 🥗 nutri-skills
 
-**nutri-skills** is a modular AI ecosystem designed to transform a static nutritional prescription into an interactive, dynamic, and portable assistant. Developed for those following the Mediterranean diet, the project automates meal planning, analysis of external menus (canteens, restaurants), grocery management, and recipe creation, while always maintaining consistency with a nutritionist's guidelines.
+**nutri-skills** è un ecosistema AI modulare progettato per trasformare una prescrizione nutrizionale statica in un assistente interattivo, dinamico e portatile. Sviluppato per chi segue la dieta mediterranea, il progetto automatizza la pianificazione dei pasti, l'analisi dei menù esterni (mense, ristoranti), la gestione della spesa e la creazione di ricette reali, mantenendo sempre la coerenza con le direttive del medico nutrizionista.
 
-## 🚀 Project Vision
-Unlike traditional diet apps, **nutri-skills** doesn't require manual calorie counting. It uses artificial intelligence to interpret original medical documents, user personal tastes, and the current context (e.g., today's office canteen offerings) to propose correct food choices in real-time.
+## 🚀 Visione del Progetto
+A differenza delle app di dieta tradizionali, **nutri-skills** non richiede l'inserimento manuale di calorie. Utilizza l'intelligenza artificiale per interpretare i documenti medici originali, i gusti personali dell'utente e il contesto del momento (es. cosa offre la mensa aziendale oggi) per proporre scelte alimentari corrette in tempo reale.
 
 ---
 
-## 🛠️ The Skill Suite
+## 🛠️ La Suite di Skill
 
-The project is built upon 4 specialized, independent, and portable skills:
+Il progetto si basa su 4 skill specializzate, indipendenti e portatili:
 
 ### 1. `nutrition-planner` (The Architect)
-The brain of the system. It handles translating the medical prescription into a digital plan (`piano.json`) and generating user documents.
-- **Features**: OCR analysis of PDF prescriptions, user profile management (allergies, blacklist), calculation of weekly protein frequencies.
-- **Usage Example**: *"Activate nutrition-planner and analyze my new summer diet, excluding bell peppers because I don't digest them well."*
+È il cervello del sistema. Incorpora le regole nutrizionali estratte dalla **Guida Alimentare** (frequenze, dosi, blocchi).
+- **Processo**: Analisi OCR di prescrizioni PDF, gestione profilo (allergie, blacklist), calcolo delle frequenze (Pesce 3v, Uova 3v, Formaggi 3v, Carne 2v).
+- **Conoscenza**: Dosi precise (10g Olio, 120g Yogurt, 150g Frutta) e bilanciamento dei macro-nutrienti.
+- **Esempio d'uso**: *"Analizza la mia nuova dieta PDF e crea il piano settimanale escludendo il merluzzo."*
 
 ### 2. `canteen-matcher` (The Canteen Assistant)
-Solves the problem of eating out. It analyzes external menus and finds the perfect match with your diet.
-- **Features**: Interprets menus from photos/screenshots/text using culinary domain knowledge. Suggests "Smart Swaps" (swapping meals between different days) if today's menu isn't compatible with the planned meal.
-- **Usage Example**: *"Use canteen-matcher on this photo of the Trattoria menu and tell me what I can pick to stay on plan today."*
+Risolve il problema dei pasti fuori casa usando intelligenza gastronomica.
+- **Processo**: Analizza menu da foto/screenshot/testo. Flagga i pasti come "consumati" in locale.
+- **Logica**: Se il menu non offre il piatto previsto, propone uno **"Smart Swap"** con qualsiasi altro giorno della settimana. Conosce gli ingredienti "nascosti" nei piatti della tradizione.
+- **Esempio d'uso**: *"Cosa posso mangiare oggi da questo screenshot del menu della Trattoria?"*
 
 ### 3. `grocery-manager` (The Personal Shopper)
-Optimizes food procurement while reducing waste.
-- **Features**: Conducts a quick Q&A to understand how many meals will be eaten at home. Reads the weekly plan and generates an aggregated shopping list by department (Produce, Dairy, Pantry, Meat/Fish).
-- **Usage Example**: *"Generate the shopping list for next week: lunch in the canteen from Monday to Friday, and I have a dinner out on Saturday night."*
+Ottimizza l'approvvigionamento alimentare.
+- **Processo**: Sottopone un Q&A per capire quanti pasti farai a casa. Genera una lista della spesa aggregata per reparto (Ortofrutta, Banco Frigo, ecc.).
+- **Esempio d'uso**: *"Genera la lista della spesa per la settimana: pranzo fuori Lun-Ven."*
 
 ### 4. `recipe-chef` (The Creative Cook)
-Transforms pantry ingredients into real Mediterranean tradition dishes.
-- **Features**: Proposes real recipes based on purchased ingredients (analyzing receipts or shopping lists). Alerts if essential components for planned meals are missing.
-- **Usage Example**: *"Chef, I bought everything except the beans. What can I cook tonight that is consistent with the plan and follows Italian cuisine?"*
+Trasforma il piano in ricette reali e azionabili.
+- **Processo**: Analizza scontrini o liste spesa per conoscere l'inventario reale. Propone ricette italiane/mediterranee con tecnica "no-soffritto".
+- **Esempio d'uso**: *"Chef, cosa cuciniamo stasera con gli ingredienti che ho comprato e il pesce spada previsto?"*
 
 ---
 
-## 🔄 Typical Operational Workflow
-
-1.  **Sunday Evening**: Invoke `nutrition-planner` to generate the new week's menu.
-2.  **Shopping Planning**: Invoke `grocery-manager` to know what to buy, excluding office lunches.
-3.  **In the Canteen (Mon-Fri)**: At 12:00, paste the corporate menu text into `canteen-matcher` to decide your tray. If you choose a Thursday dish, the "swap" is automatically recorded.
-4.  **Dinner at Home**: Ask `recipe-chef` for a quick recipe to cook the planned protein with the vegetables you have in the fridge.
-
----
-
-## 📂 Supported Use Cases
-- **Bootstrap from PDF**: Creation of a digital plan starting from a scan or PDF of a prescribed diet.
-- **Multi-Format Output**: Automatic generation of an HD PDF (based on the original template) and a responsive HTML version for smartphones.
-- **Intelligent Culinary Analysis**: Ability to recognize "hidden" ingredients in complex dishes (e.g., knowing that *Risotto alla milanese* implies the use of butter/fats).
-- **Blacklist Management**: Automatic and persistent exclusion of disliked foods, allergens, or items prohibited by religious beliefs.
-- **Smart Swapping**: Dynamic management of unforeseen events through meal swaps between days of the week.
+## 📂 Casi d'Uso Supportati
+- **Bootstrap da PDF**: Creazione del piano digitale partendo da una scansione o PDF della dieta prescritta.
+- **Multi-Format Output**: Generazione automatica di un PDF HD (basato sul template originale) e di una versione HTML responsive.
+- **Analisi Gastronomica Intelligente**: Riconoscimento ingredienti in piatti complessi (es. Risotto = burro/grassi).
+- **Smart Swapping & Persistence**: Gestione dinamica degli imprevisti tramite scambi di pasto tracciati in JSON locale.
 
 ---
 
-## ⚙️ Installation and Setup
+## ⚙️ Installazione e Setup
 
-### Prerequisites
-- **Gemini CLI** (or a compatible agent).
-- **Python 3.10+** with libraries: `PyMuPDF (fitz)`, `Pillow`, `pdfplumber`.
-
-### Quick Start
-1.  Clone the repository: `git clone https://github.com/andreamartelli/nutri-skills.git`
-2.  Run the installer: `./setup.sh` (copies skills locally and configures dependencies).
-3.  Enter the workspace and start: *"Activate the nutrition-planner skill"*.
+1.  Clona il repository: `git clone https://github.com/andreamartelli/nutri-skills.git`
+2.  Esegui l'installatore: `./setup.sh`
+3.  Entra nel workspace e inizia: *"Attiva la skill nutrition-planner"*.
 
 ---
-*Project developed for Andrea Martelli. Nutritional logic based on models by Dr. Massimo Mariani.*
+*Progetto sviluppato per Andrea Martelli. Dati nutrizionali basati sul piano del Dott. Massimo Mariani.*
